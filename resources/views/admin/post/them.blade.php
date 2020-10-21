@@ -7,14 +7,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Slide
+                <h1 class="page-header">Bài đăng
                     <small>thêm</small>
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
 
-                @if (count($errors) > 0)
+            @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     @foreach ($errors->all() as $err)
                         {{$err}}<br>
@@ -23,39 +23,50 @@
             @endif
             
             @if (session('thongbao'))
-                <div class="alert alert-danger">
+                <div class="alert alert-success">
                     {{session('thongbao')}}
                 </div>
             @endif
             
-            @if (session('thanhcong'))
-                <div class="alert alert-success">
-                    {{session('thanhcong')}}
-                </div>
-            @endif
-                <form action="admin/slide/them" method="POST" enctype="multipart/form-data">
+                <form action="admin/post/them" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{csrf_token()}}" />
                     
                     <div class="form-group">
-                        <label>Tên</label>
-                        <input class="form-control" name="Ten" placeholder="nhập tên slide" />
+                        <label>Thể loại</label>
+                        <select class="form-control" name="category" id="category">
+                            @foreach ($categories as $ct)
+                                <option value="{{$ct->id}}">{{$ct->title}}</option>
+                            @endforeach
+                        </select>
                     </div>
+
+                    <div class="form-group">
+                        <label>Tiêu đề</label>
+                        <input class="form-control" name="title" id="title" placeholder="nhập tiêu đề cho bài post" />
+                    </div>
+
                     <div class="form-group">
                         <label>Nội dung</label>
-                        <textarea id="demo" class="form-control ckeditor" name="NoiDung" rows = "3"></textarea>
+                        {{-- <textarea id="demo" class="form-control ckeditor" name="content" id="content" rows = "3"></textarea> --}}
+                        <textarea class="form-control" id="demo" rows="3" name="content"></textarea>
+
                     </div>
+                    
                     <div class="form-group">
-                        <label>link</label>
-                        <input class="form-control" name="link" placeholder="nhập link" />
+                        <label>Loại Tin</label>
+                        <select class="form-control" id="published" name="published" >
+                            <option value="{{0}}">Chờ duyệt</option>
+                            <option value="{{1}}">Duyệt luôn</option>
+                        </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label>Hình ảnh</label>
-                        <input type="file" class="form-control" name="Hinh" />
+                        <label for="">Ngày Duyệt : </label>
+                        <input type="date" name="published_at" id="published_at" name="bday" disabled="">
                     </div>
-        
-    
-                    <button type="submit" class="btn btn-default">Thêm</button>
-                    <button type="reset" class="btn btn-default">Làm mới</button>
+                        
+                    <button type="submit" class="btn btn-primary">Thêm</button> 
+                    <button type="reset" class="btn btn-primary">Làm mới</button>
                 <form>
             </div>
         </div>

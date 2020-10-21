@@ -84,13 +84,13 @@
                             {{$count_likeCm}}
                             @if ($like_check == true)
                 
-                                <button id="btnLike" name="btnLike" value="{{$cm->id}}" class="btn-likecm">
+                                <button id="" name="btnLike" value="{{$cm->id}}" class="btn-likecm">
                                     Like
                                 </button>
                             
                             @else 
                             
-                                <button id="btnDaLike" name="btnDaLike" value="{{$cm->id}}" class="btn-dalikecm" >
+                                <button id="" name="btnDaLike" value="{{$cm->id}}" class="btn-dalikecm" >
                                     <font color="0000FF">Đã Like</font>
                                 </button>
                             
@@ -172,10 +172,12 @@
                         
                    </div>
                    @endforeach
-                   <label>nhập bình luận...</label>
+                    <label>nhập bình luận...</label>
                        <form role="form" action="repcomment/{{$cm->id}}/{{$post->id}}" method="post" >
                            <input type="hidden" name="_token" value="{{csrf_token()}}" />
-                           <input type="text" class="form-control" name="repcomment">
+                           <div class="form-group">
+                                <input type="text" class="form-control" name="repcomment">
+                            </div>
                            <button type="submit" >bình luận</button>
                        </form>
                    </div>
@@ -199,7 +201,7 @@
                    <!-- item -->
                    <div class="row" style="margin-top: 10px;">
                        <div class="col-md-5">
-                           <a href="">
+                           <a href="chitietbaipost/{{$plq->id}}">
                                <img class="img-responsive" src="image/user/user_icon_153312.png" alt="">
                            </a>
                        </div>
@@ -224,7 +226,7 @@
                    <!-- item -->
                    <div class="row" style="margin-top: 10px;">
                        <div class="col-md-5">
-                           <a href="">
+                           <a href="chitietbaipost/{{$pmn->id}}">
                                <img class="img-responsive" src="image/user/user_icon_153312.png" alt="">
                            </a>
                        </div>

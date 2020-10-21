@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="homepage">VMO-Confession</a>
+            <a href="homepage"><img src="image/logo.PNG" width="85px" height="60px" alt=""></a>
 
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,12 +19,17 @@
             <ul class="nav navbar-nav">
                 <li>
 
-                    <a href="#">Giới thiệu</a>
+                    <a href="introduct">Giới thiệu</a>
                 </li>
                 <li>
-                    <a href="#">Liên hệ</a>
+                    <a href="contact">Liên hệ</a>
 
                 </li>
+                @role('admin')
+                <li>
+                    <a href="admin/post/danhsachchuaduyet">Admin</a>
+                </li>
+                @endrole
             </ul>
 
             <form class="navbar-form navbar-left" role="search" action="search" method="POST">
@@ -36,7 +41,7 @@
                 <div class="form-group">
 
                     <select class="form-control" name="category" style="color: blu">
-                        <option value="0" selected>Tất Cả thể loại</option>
+                        <option value='0' selected="selected">Tất cả thể loại</option>
                         @foreach($category as $tl)
 
                             <option value={{ $tl->id }}>{{ $tl->title }}</option>
@@ -45,7 +50,7 @@
 
                     </select>
                 </div>
-                <button type="submit" class="btn btn-default">Tìm kiếm</button>
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
             </form>
 
             <ul class="nav navbar-nav pull-right">
@@ -70,7 +75,6 @@
                         <a href="dangnhap">Đăng nhập</a>
                     </li>
                 @endif
-
 
 
 

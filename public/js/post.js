@@ -28,41 +28,41 @@
 $(document).ready(function(){
     //like
     $(document).on('click', '.btn-like', function(){
-      var idPost = $('.btn-like').val();
+      var idPost = $(this).val();
       //console.log(idPost)
         $.get('like/'+idPost,function(data){
-          $("#like").html(data);
+          $("#likep"+idPost).html(data);
         });
         $.get('dadislike/'+idPost,function(data){
-          $("#dislike").html(data);
+          $("#dislikep"+idPost).html(data);
       });
     });
   
     $(document).on('click', '.btn-dalike', function(){
-      var idPost = $('.btn-dalike').val();
+      var idPost = $(this).val();
       //console.log(idPost)
       $.get('dalike/'+idPost,function(data){
         //alert(data);
-        $("#like").html(data);
+        $("#likep"+idPost).html(data);
       });
     });
     
     //dislike
     $(document).on('click','.btn-dislike', function(){
       //alert("12345")
-        var idPost = $('.btn-dislike').val();
+        var idPost = $(this).val();
         $.get('dislike/'+idPost,function(data){
-            $("#dislike").html(data);
+            $("#dislikep"+idPost).html(data);
         });
         $.get('dalike/'+idPost,function(data){
-            $("#like").html(data);
+            $("#likep"+idPost).html(data);
         });
     });
 
     $(document).on('click','.btn-dadislike', function(){
-      var idPost = $('.btn-dadislike').val();
-      $.get('dadislike/'+idPost,function(data){
-          $("#dislike").html(data);
+      var idPost = $(this).val();
+      $.get('dadislikep/'+idPost,function(data){
+          $("#dislikep"+idPost).html(data);
       });
     });
 
@@ -142,8 +142,51 @@ $(document).ready(function(){
       });
      });
 
+  $(document).on('click', '.btn-dadislike', function () {
+    var idPost = $(this).val();
+    $.get('dadislike/' + idPost, function (data) {
+      $("#dislike" + idPost).html(data);
+    });
   });
+
+
   
+  //vote
+
+  $('.btn-vote').click(function (e) {
+    //console.log("toanto");
+    e.preventDefault();
+    var idpos = $(this).val()
+    var pointVote = $('#point'+ idpos).val()
+    //console.log(idpos)
+    $.ajax({
+      type: 'POST',
+      url: 'vote/'+idpos,
+      dataType: 'json',
+      data:
+      // {
+      //     _token:"{{ csrf_token() }}",
+      //     point:pointVote,
+      //     idpost:idpos
+      // },
+      $('#myForm'+idpos).serialize(),
+      success: function (data) {
+        $('#vt'+idpos).html(data.tb + '/5');
+        $('#resultVote'+idpos).html(data.sl);
+        $('#exampleModal'+idpos).modal('hide');
+        // $('#btn-'+idpos).removeAttr('style');
+        $('#btn-'+idpos).removeClass('btnhover')
+          console.log('Submission was successful.')
+      },
+      error: function (data) {
+        console.log('An error occurred.');
+
+      },
+    });
+  });
+
+});
+
   // $(document).ready(function(){
   //     $("#btnLike").click(function(){
   //       var idPost = $(this).val();
@@ -153,7 +196,7 @@ $(document).ready(function(){
   //       });
   //     });
   // //});
-  
+
   // //$(document).ready(function(){
   //   $("#btnDaLike").click(function(){
   //     var idPost = $(this).val();
@@ -163,5 +206,5 @@ $(document).ready(function(){
   //     });
   //   });
   // });
-  
-  
+
+
